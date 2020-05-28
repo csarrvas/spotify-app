@@ -16,7 +16,7 @@ export const searchAlbumsAction = searchedWord => async dispatch => {
       dispatch({
         type: MAKE_SEARCH_SUCCESS,
         payload: {
-          albums: response.data.albums
+          data: response.data
         }
       });
       

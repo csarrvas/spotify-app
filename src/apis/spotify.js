@@ -2,6 +2,17 @@ import axios from 'axios';
 
 const spotify = axios.create({ baseURL: 'https://api.spotify.com/v1' });
 
+export const userDetail = () => {
+  const token = localStorage.getItem('spotify-token');
+  return spotify.get('/me', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+}
+
 export const searchAlbums = searchedWord => {
   const token = localStorage.getItem('spotify-token');
   return spotify.get(`/search?q=${searchedWord}&type=album&limit=10`, {

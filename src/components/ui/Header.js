@@ -2,15 +2,31 @@ import React, { Fragment, useState } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { searchAlbumsAction } from '../../actions/searchActions';
-import { closeSessionAction } from '../../actions/authenticationActions';
+import { startSessionAction, closeSessionAction } from '../../actions/authenticationActions';
 import { generateRandomString } from '../../helpers/helpers';
 import swal from 'sweetalert';
 import './header.scss';
 
 import logo from '../../assets/images/app-logo.png';
 
-const Header = ({ session, searchAlbums, closeSession }) => {
+const Header = ({ session, searchAlbums, startSession, closeSession }) => {
   const [ searchedWord, setSearchedWord ] = useState('');
+
+  if (!session && window.location.hash) {
+    const response = window.location.hash.slice(1).split('&');
+    const data = {};
+    response.forEach(item => {
+      const keyAndValue = item.split('=');
+      data[keyAndValue[0]] = keyAndValue[1];
+    });
+    if (data.access_token && data.state && localStorage.getItem('spotify-state') === data.state) {
+      localStorage.removeItem('spotify-state');
+      swal("Nice!", "Session started successfully", "success");
+      startSession(data.access_token);
+    } else {
+      swal("Oops!", "Your state code is not the same, try again", "warning");
+    }
+  }
 
   const makeASearch = e => {
     e.preventDefault();
@@ -104,6 +120,7 @@ const Header = ({ session, searchAlbums, closeSession }) => {
 const mapDispatchToProps = dispatch => {
   return {
     searchAlbums: searchedWord => dispatch(searchAlbumsAction(searchedWord)),
+    startSession: token => dispatch(startSessionAction(token)),
     closeSession: () => dispatch(closeSessionAction())
   }
 }

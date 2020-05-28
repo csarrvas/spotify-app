@@ -17,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: true, error: false };
     
     case FETCH_ALBUM_SUCCESS:
-      return { data: action.payload.album, loading: false, error: false };
+      return { ...state, data: action.payload.album, loading: false, error: false };
     
     case FETCH_ALBUM_ERROR:
       return { ...state, loading: false, error: true };

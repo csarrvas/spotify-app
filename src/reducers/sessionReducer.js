@@ -1,8 +1,8 @@
-import { START_SESSION, CLOSE_SESSION } from '../actions/types';
+import { START_SESSION_SUCCESS, CLOSE_SESSION } from '../actions/types';
 
 export default (state = false, action) => {
   switch (action.type) {
-    case START_SESSION:
+    case START_SESSION_SUCCESS:
       return true;
     
     case CLOSE_SESSION:

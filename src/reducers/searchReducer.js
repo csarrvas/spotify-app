@@ -6,7 +6,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  albums: {},
+  data: {},
   loading: false,
   error: false
 }
@@ -17,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: true, error: false };
     
     case MAKE_SEARCH_SUCCESS:
-      return { albums: action.payload.albums, loading: false, error: false };
+      return { ...state, data: action.payload.data, loading: false, error: false };
     
     case MAKE_SEARCH_ERROR:
       return { ...state, loading: false, error: true };
