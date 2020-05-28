@@ -15,11 +15,11 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         <SiteRoute exact path='/' component={Home} />
-        <SiteRoute exact path='/login' component={Login} />
-        <SiteRoute exact path='/albums' component={Albums} />
-        <SiteRoute exact path='/albums/:albumId' component={AlbumDetail} />
-        <SiteRoute exact path='/artist/:artistId' component={ArtistDetail} />
-        <SiteRoute exact path='/profile' component={Profile} />
+        <SiteRoute path='/login' component={Login} />
+        <SiteRoute path='/albums' component={Albums} />
+        <SiteRoute path='/albums/:albumId' component={AlbumDetail} />
+        <SiteRoute path='/artist/:artistId' component={ArtistDetail} />
+        <SiteRoute path='/profile' component={Profile} />
         <SiteRoute component={Error404} />
       </Switch>
     </BrowserRouter>
