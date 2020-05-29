@@ -12,7 +12,7 @@ export const requestAlbumDetailAction = albumId => async dispatch => {
   });
   requestAlbumDetail(albumId)
   .then(response => {
-    if (response.data) {
+    if (response.status === 200) {
       dispatch({
         type: FETCH_ALBUM_SUCCESS,
         payload: {
@@ -22,13 +22,19 @@ export const requestAlbumDetailAction = albumId => async dispatch => {
       
     } else {
       dispatch({
-        type: FETCH_ALBUM_ERROR
+        type: FETCH_ALBUM_ERROR,
+        payload: {
+          error: `${response.status} ${response.statusText}`
+        }
       });
     }
   })
   .catch(() => {
     dispatch({
-      type: FETCH_ALBUM_ERROR
+      type: FETCH_ALBUM_ERROR,
+      payload: {
+        error: `There is a problem with the data`
+      }
     });
   });
 }

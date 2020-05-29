@@ -9,31 +9,39 @@ import './header.scss';
 
 import logo from '../../assets/images/app-logo.png';
 
-const Header = ({ session, searchAlbums, startSession, closeSession }) => {
+const Header = ({ session, errorMessage, searchAlbums, startSession, closeSession }) => {
   const [ searchedWord, setSearchedWord ] = useState('');
 
-  if (!session && window.location.hash) {
-    const response = window.location.hash.slice(1).split('&');
-    const data = {};
-    response.forEach(item => {
-      const keyAndValue = item.split('=');
-      data[keyAndValue[0]] = keyAndValue[1];
-    });
-    if (data.access_token && data.state && localStorage.getItem('spotify-state') === data.state) {
-      localStorage.removeItem('spotify-state');
-      swal("Nice!", "Session started successfully", "success");
-      startSession(data.access_token);
+  if ((!session && window.location.hash) || (!session && localStorage.getItem('spotify-token'))) {
+    if (window.location.hash) {
+      const response = window.location.hash.slice(1).split('&');
+      const data = {};
+      response.forEach(item => {
+        const keyAndValue = item.split('=');
+        data[keyAndValue[0]] = keyAndValue[1];
+      });
+      if (data.access_token && data.state && localStorage.getItem('spotify-state') === data.state) {
+        localStorage.removeItem('spotify-state');
+        swal("Nice!", "Session started successfully", "success");
+        startSession(data.access_token);
+      } else {
+        swal("Oops!", "Your state code is not the same, try again", "warning");
+      }
     } else {
-      swal("Oops!", "Your state code is not the same, try again", "warning");
+      if (errorMessage) {
+        swal("Oops!", "Your session has expired, please login again", "error");
+      } else {
+        swal("Nice!", "You are already logged in", "success");
+        startSession(localStorage.getItem('spotify-token'));
+      }
     }
   }
 
   const makeASearch = e => {
     e.preventDefault();
-    console.log(searchedWord);
     if (session) {
       if (searchedWord) {
-        searchAlbums(searchedWord);
+        searchAlbums(searchedWord, 1);
       } else {
         swal("Oops!", "Type something to start the search", "warning");
       }
@@ -119,7 +127,7 @@ const Header = ({ session, searchAlbums, startSession, closeSession }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    searchAlbums: searchedWord => dispatch(searchAlbumsAction(searchedWord)),
+    searchAlbums: (searchedWord, actualPage) => dispatch(searchAlbumsAction(searchedWord, actualPage)),
     startSession: token => dispatch(startSessionAction(token)),
     closeSession: () => dispatch(closeSessionAction())
   }
@@ -127,7 +135,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state =>{
   return {
-    session: state.session
+    session: state.session,
+    errorMessage: state.userProfile.errorMessage
   }
 }
  

@@ -14,23 +14,28 @@ export const startSessionAction = token => async dispatch => {
   });
   userDetail()
   .then(response => {
-    if (response.data) {
+    if (response.status === 200) {
       dispatch({
         type: START_SESSION_SUCCESS,
         payload: {
           data: response.data
         }
       });
-      
     } else {
       dispatch({
-        type: START_SESSION_ERROR
+        type: START_SESSION_ERROR,
+        payload: {
+          error: `${response.status} ${response.statusText}`
+        }
       });
     }
   })
   .catch(() => {
     dispatch({
-      type: START_SESSION_ERROR
+      type: START_SESSION_ERROR,
+      payload: {
+        error: `There is a problem with the data`
+      }
     });
   });
 }

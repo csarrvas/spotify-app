@@ -12,7 +12,7 @@ export const requestArtistDetailAction = artistId => async dispatch => {
   });
   requestArtistDetail(artistId)
   .then(response => {
-    if (response.data) {
+    if (response.status === 200) {
       dispatch({
         type: FETCH_ARTIST_SUCCESS,
         payload: {
@@ -22,13 +22,19 @@ export const requestArtistDetailAction = artistId => async dispatch => {
       
     } else {
       dispatch({
-        type: FETCH_ARTIST_ERROR
+        type: FETCH_ARTIST_ERROR,
+        payload: {
+          error: `${response.status} ${response.statusText}`
+        }
       });
     }
   })
   .catch(() => {
     dispatch({
-      type: FETCH_ARTIST_ERROR
+      type: FETCH_ARTIST_ERROR,
+      payload: {
+        error: `There is a problem with the data`
+      }
     });
   });
 }

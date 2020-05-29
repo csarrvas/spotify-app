@@ -13,9 +13,9 @@ export const userDetail = () => {
   });
 }
 
-export const searchAlbums = searchedWord => {
+export const searchAlbums = (searchedWord, actualPage) => {
   const token = localStorage.getItem('spotify-token');
-  return spotify.get(`/search?q=${searchedWord}&type=album&limit=10`, {
+  return spotify.get(`/search?q=${searchedWord}&type=album&limit=10&offset=${10 * (actualPage - 1)}`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
