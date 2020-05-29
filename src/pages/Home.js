@@ -1,12 +1,23 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ session }) => {
+  if (session) {
+    return <Redirect to="/albums"/>
+  }
+
   return (
     <div>
-      <Link to="/albums"><button>Go to albums</button></Link>
+      Home
     </div>
   );
 }
- 
-export default Home;
+
+const mapStateToProps = state => {
+  return {
+    session: state.session
+  }
+}
+
+export default connect(mapStateToProps)(Home);

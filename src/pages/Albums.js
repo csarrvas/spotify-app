@@ -2,17 +2,18 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { searchAlbumsAction } from '../actions/searchActions';
 import { Redirect } from 'react-router-dom';
-import swal from 'sweetalert';
+import AlbumCard from '../components/albumCard/AlbumCard';
 import Spinner from '../components/Spinner';
 
-const Albums = ({ session, search, searchAlbums }) => {
+const Albums = ({ session, albums, searchedWord, actualPage, loading, error, errorMessage, searchAlbums }) => {
   if (!session) {
-    swal("Wait!", "You have to be logged in to look this page", "warning");
     return <Redirect to="/"/>
   }
 
   const changePage = e => {
-    searchAlbums(search.searchedWord, parseInt(e.target.value));
+    if (actualPage !== parseInt(e.target.value)) {
+      searchAlbums(searchedWord, parseInt(e.target.value));
+    }
   }
 
   const displayPagination = total => {
@@ -20,36 +21,35 @@ const Albums = ({ session, search, searchAlbums }) => {
     const pages = [];
     for (let page = 1; page <= numberOfPages; page++) {
       pages.push(
-        <button value={page} onClick={changePage}>{page}</button>
+        <button key={`page-${page}`} value={page} onClick={changePage}>{page}</button>
       );
     }
     return pages;
   }
 
   const displayContent = () => {
-    if (search.loading) {
+    if (loading) {
       return <Spinner/>
-    } else if (search.actualPage === 0) {
+    } else if (actualPage === 0) {
       return (
         <div>Look for something to start</div>
       );
     } else {
-      if (search.data.albums.items.length === 0) {
-        return (
-          <div>No results found</div>
-        );
-      } else {
-        return (
-          <Fragment>
-            <div id="albums">
-
-            </div>
-            <div id="pagination">
-              {displayPagination(search.data.albums.total).map(page => page)}
-            </div>
-          </Fragment>
-        );
-      }
+      return (
+        <Fragment>
+          <div id="albums">
+            {albums.items.length === 0
+              ? <div className="error">No results found</div>
+              : albums.items.map(album => (
+                <AlbumCard key={album.id} album={album} />
+              ))
+            }
+          </div>
+          <div id="pagination">
+            {displayPagination(albums.total).map(page => page)}
+          </div>
+        </Fragment>
+      );
     }
   }
 
@@ -57,7 +57,6 @@ const Albums = ({ session, search, searchAlbums }) => {
     <Fragment>
       {displayContent()}
     </Fragment>
-    
   );
 }
 
@@ -67,10 +66,16 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
+  const { data, searchedWord, actualPage, loading, error, errorMessage } = state.search;
   return {
     session: state.session,
-    search: state.search
+    albums: data.albums,
+    searchedWord,
+    actualPage,
+    loading,
+    error,
+    errorMessage
   }
 }
 
