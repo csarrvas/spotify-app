@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Before Starting
+
+Spotify has a small problem with its api when making a request for albums, it returns a false number of total (possibly due to results blocked in the country or something like that) and since that number is the one used to do the pagination, it is possible that in certain searches the last pages will be without results.
+
+Add a .env file with:
+
+### `REACT_APP_CLIENT_ID=a5fa9e60468e466f8fba69d6155a4824`
+
 ## Available Scripts
 
 In the project directory, you can run:
