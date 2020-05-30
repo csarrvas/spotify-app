@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ArtistCard correctly 1`] = `
+<div
+  className="artist-related"
+>
+  <p>
+    Flo Rida
+  </p>
+  <a
+    href="https://open.spotify.com/artist/0jnsk9HBra6NMjO2oANoPY"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <i
+      className="fas fa-play-circle"
+    >
+      Go to this artist on spotify
+    </i>
+  </a>
+</div>
+`;

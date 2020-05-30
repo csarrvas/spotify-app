@@ -7,8 +7,6 @@ import { generateRandomString } from '../../helpers/helpers';
 import swal from 'sweetalert';
 import './header.scss';
 
-import logo from '../../assets/images/app-logo.png';
-
 const Header = ({ session, userName, errorMessage, searchAlbums, startSession, closeSession }) => {
   const [ searchedWord, setSearchedWord ] = useState('');
 
@@ -110,7 +108,7 @@ const Header = ({ session, userName, errorMessage, searchAlbums, startSession, c
     <header>
       <figure>
         <Link to="/">
-          <img alt="logo" src={logo}/>
+          <img alt="logo" src="/images/app-logo.png"/>
         </Link>
       </figure>
       <div id="make-a-search">

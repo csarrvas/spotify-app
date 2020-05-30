@@ -41,3 +41,9 @@ export const searchAlbumsAction = (searchedWord, actualPage) => async dispatch =
     });
   });
 }
+
+export const prueba = () => {
+  return {
+    type: 'PRUEBA'
+  }
+}

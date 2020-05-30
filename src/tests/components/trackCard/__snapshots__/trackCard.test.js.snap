@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render TrackCard correctly 1`] = `
+<div
+  className="track"
+>
+  <p>
+    CD-1 / 2 - Give Me Everything (feat. Ne-Yo, Afrojack & Nayer)
+  </p>
+  <p>
+    Duration: 4:12
+  </p>
+  <a
+    href="https://open.spotify.com/track/4QNpBfC0zvjKqPJcyqBy9W"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <i
+      className="fas fa-play-circle"
+    >
+       Go to this song on spotify
+    </i>
+  </a>
+</div>
+`;

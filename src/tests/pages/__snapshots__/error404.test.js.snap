@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Error404 correctly 1`] = `
+<div
+  id="error404"
+>
+  <img
+    alt="error 404"
+    src="/images/error-404.png"
+  />
+  <p>
+    Page not found
+  </p>
+</div>
+`;

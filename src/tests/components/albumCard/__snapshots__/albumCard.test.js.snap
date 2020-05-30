@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render AlbumCard correctly 1`] = `
+<div
+  className="album-card"
+>
+  <div>
+    <p>
+      50 Cent
+    </p>
+  </div>
+  <figure>
+    <img
+      alt="album Get Rich Or Die Tryin'"
+      src="https://i.scdn.co/image/ab67616d00001e02d843fabb75fef14010e30cae"
+    />
+  </figure>
+  <div>
+    <p>
+      Get Rich Or Die Tryin'
+    </p>
+  </div>
+  <div>
+    <a
+      href="https://open.spotify.com/album/5G5rgQHzdQnw32SI0WjIo5"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fas fa-play-circle"
+      >
+         Go to this album on spotify
+      </i>
+    </a>
+  </div>
+  <div>
+    <Link
+      to="/albums/5G5rgQHzdQnw32SI0WjIo5"
+    >
+      <button>
+        Album detail
+      </button>
+    </Link>
+  </div>
+</div>
+`;
