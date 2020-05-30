@@ -1,7 +1,25 @@
-#error-image {
-  width: '50%';
+#error404 {
+  margin: 10px 5px;
+  padding: 0px 7px;
+  color: #fff;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 50%;
+  }
+  
+  p {
+    font-size: 2rem;
+  }
 }
 
-#error-message {
-  font-size: '1.2rem';
+@media screen and (max-width: 450px) {
+  #error404 {
+    img {
+      width: 90%;
+    }
+  }
 }
