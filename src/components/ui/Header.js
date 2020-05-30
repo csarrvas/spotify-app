@@ -45,6 +45,7 @@ const Header = ({ session, userName, errorMessage, searchAlbums, startSession, c
     if (session) {
       if (searchedWord) {
         searchAlbums(searchedWord, 1);
+        setSearchedWord('');
       } else {
         swal("Oops!", "Type something to start the search", "warning");
       }
@@ -118,6 +119,7 @@ const Header = ({ session, userName, errorMessage, searchAlbums, startSession, c
             onChange={onInputChange}
             type="text"
             placeholder="Search for an album"
+            value={searchedWord}
           />
         </form>
       </div>

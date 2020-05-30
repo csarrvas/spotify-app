@@ -28,18 +28,21 @@ const Albums = ({ session, albums, searchedWord, actualPage, loading, error, err
   }
 
   const displayContent = () => {
-    if (loading) {
+    if (error) {
+      return <div className="error"><p>{errorMessage}</p></div>
+
+    } else if (loading) {
       return <Spinner/>
+
     } else if (actualPage === 0) {
-      return (
-        <div>Look for something to start</div>
-      );
+      return <div className="start"><p>Look for something to start</p></div>
+      
     } else {
       return (
         <Fragment>
           <div id="albums">
             {albums.items.length === 0
-              ? <div className="error">No results found</div>
+              ? <div className="error"><p>No results found</p></div>
               : albums.items.map(album => (
                 <AlbumCard key={album.id} album={album} />
               ))
@@ -54,9 +57,9 @@ const Albums = ({ session, albums, searchedWord, actualPage, loading, error, err
   }
 
   return (
-    <Fragment>
+    <div id="albums">
       {displayContent()}
-    </Fragment>
+    </div>
   );
 }
 

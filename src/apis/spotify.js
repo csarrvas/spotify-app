@@ -37,7 +37,29 @@ export const requestAlbumDetail = albumId => {
 
 export const requestArtistDetail = artistId => {
   const token = localStorage.getItem('spotify-token');
-  return spotify.get(`/artist/${artistId}`, {
+  return spotify.get(`/artists/${artistId}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+}
+
+export const requestArtistTopTracks = artistId => {
+  const token = localStorage.getItem('spotify-token');
+  return spotify.get(`/artists/${artistId}/top-tracks?country=SV`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+}
+
+export const requestArtistRelatedArtists = artistId => {
+  const token = localStorage.getItem('spotify-token');
+  return spotify.get(`/artists/${artistId}/related-artists`, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',

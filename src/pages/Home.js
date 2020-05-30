@@ -8,7 +8,7 @@ const Home = ({ session }) => {
   }
 
   return (
-    <div>
+    <div id="home">
       Home
     </div>
   );
