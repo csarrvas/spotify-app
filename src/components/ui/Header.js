@@ -43,7 +43,7 @@ const Header = ({ session, userName, errorMessage, searchAlbums, startSession, c
   const makeASearch = e => {
     e.preventDefault();
     if (session) {
-      if (searchedWord) {
+      if (searchedWord.toLowerCase().trim()) {
         searchAlbums(searchedWord, 1);
         setSearchedWord('');
       } else {
@@ -55,7 +55,7 @@ const Header = ({ session, userName, errorMessage, searchAlbums, startSession, c
   }
 
   const onInputChange = e => {
-    setSearchedWord(e.target.value.toLowerCase().trim());
+    setSearchedWord(e.target.value);
   }
 
   const logout = () => {
@@ -78,7 +78,7 @@ const Header = ({ session, userName, errorMessage, searchAlbums, startSession, c
 
   const login = () => {
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-    const REDIRECT_URI = window.location.origin.replace(/:/g, '%3A').replace(/\//g, '%2F');
+    const REDIRECT_URI = window.location.origin.replace(/:/g, '%3A').replace(/\//g, '%2F').replace(/\./g, '%2E');
     const STATE = generateRandomString(16);
     localStorage.setItem('spotify-state', STATE);
 

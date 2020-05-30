@@ -11,7 +11,7 @@ const TrackCard = ({ track, fromAlbum = true, topNumber = 0 }) => {
       }
       <p>{`Duration: ${millisToMinutesAndSeconds(track.duration_ms)}`}</p>
       <a target="_blank" rel="noopener noreferrer" href={track.external_urls.spotify}>
-        <i className="fas fa-play-circle">Go to this song on spotify</i>
+        <i className="fas fa-play-circle"> Go to this song on spotify</i>
       </a>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './albumCard.scss';
 
@@ -8,22 +8,19 @@ const AlbumCard = ({ album }) => {
       <div>
         {album.artists.length === 0
           ? <p>No artist found for this album</p>
-          : <Fragment>
-              <p className="title">{album.artists.length > 1 ? 'Artists' : 'Artist'}</p>
-              <p>{(album.artists.reduce((all, artist) => all + artist.name + ', ', '')).slice(0, -2)}</p>
-            </Fragment>
+          : <p>{(album.artists.reduce((all, artist) => all + artist.name + ', ', '')).slice(0, -2)}</p>
         }
-      </div>
-      <div>
-        <a target="_blank" rel="noopener noreferrer" href={album.external_urls.spotify}>
-          <i className="fas fa-play-circle">Go to this album on spotify</i>
-        </a>
       </div>
       <figure>
         <img alt={`album ${album.name}`} src={album.images['1'].url}/>
       </figure>
       <div>
         <p>{album.name}</p>
+      </div>
+      <div>
+        <a target="_blank" rel="noopener noreferrer" href={album.external_urls.spotify}>
+          <i className="fas fa-play-circle"> Go to this album on spotify</i>
+        </a>
       </div>
       <div>
         <Link to={`/albums/${album.id}`}><button>Album detail</button></Link>

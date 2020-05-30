@@ -20,7 +20,11 @@ body {
       flex-flow: column wrap;
       justify-content: center;
       align-items: center;
-      background-color: #ddd;
+      background-image: url(/images/site-background.jpg);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
     }
   }
 }

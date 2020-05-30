@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addCommas } from '../helpers/helpers';
 import Spinner from '../components/Spinner';
+import './styles/profile.scss';
 
 const Profile = ({ session, userProfile, searchedWord, loading, error, errorMessage }) => {
   const prevSearchedWordRef = useRef();
@@ -45,7 +46,7 @@ const Profile = ({ session, userProfile, searchedWord, loading, error, errorMess
           </div>
           <div>
             <a target="_blank" rel="noopener noreferrer" href={userProfile.external_urls.spotify}>
-              <i className="fas fa-play-circle">Go to my profile on spotify</i>
+              <i className="fas fa-play-circle"> Go to my profile on spotify</i>
             </a>
           </div>
         </Fragment>

@@ -4,6 +4,7 @@ import { searchAlbumsAction } from '../actions/searchActions';
 import { Redirect } from 'react-router-dom';
 import AlbumCard from '../components/albumCard/AlbumCard';
 import Spinner from '../components/Spinner';
+import './styles/albums.scss';
 
 const Albums = ({ session, albums, searchedWord, actualPage, loading, error, errorMessage, searchAlbums }) => {
   if (!session) {
@@ -16,12 +17,12 @@ const Albums = ({ session, albums, searchedWord, actualPage, loading, error, err
     }
   }
 
-  const displayPagination = total => {
+  const displayPagination = (total, actualPage) => {
     const numberOfPages = Math.ceil(total / 10);
     const pages = [];
     for (let page = 1; page <= numberOfPages; page++) {
       pages.push(
-        <button key={`page-${page}`} value={page} onClick={changePage}>{page}</button>
+        <button key={`page-${page}`} value={page} onClick={changePage} className={page === actualPage ? 'selected' : ''}>{page}</button>
       );
     }
     return pages;
@@ -49,7 +50,7 @@ const Albums = ({ session, albums, searchedWord, actualPage, loading, error, err
             }
           </div>
           <div id="pagination">
-            {displayPagination(albums.total).map(page => page)}
+            {displayPagination(albums.total, actualPage).map(page => page)}
           </div>
         </Fragment>
       );
@@ -57,7 +58,7 @@ const Albums = ({ session, albums, searchedWord, actualPage, loading, error, err
   }
 
   return (
-    <div id="albums">
+    <div id="albums-content">
       {displayContent()}
     </div>
   );

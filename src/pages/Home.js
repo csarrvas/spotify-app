@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
+import './styles/home.scss';
 
 const Home = ({ session }) => {
   if (session) {
@@ -9,7 +10,9 @@ const Home = ({ session }) => {
 
   return (
     <div id="home">
-      Home
+      <i className="fas fa-music"></i>
+      <p>Login to start</p>
+      <i className="fas fa-headphones-alt"></i>
     </div>
   );
 }

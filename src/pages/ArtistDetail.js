@@ -9,6 +9,7 @@ import TrackCard from '../components/trackCard/TrackCard';
 import ArtistCard from '../components/artistCard/ArtistCard';
 import { addCommas } from '../helpers/helpers';
 import Spinner from '../components/Spinner';
+import './styles/artistDetail.scss';
 
 const ArtistDetail = ({
   match,
@@ -52,6 +53,11 @@ const ArtistDetail = ({
           <figure>
             <img alt={`album ${artist.name}`} src={artist.images['0'].url}/>
           </figure>
+          <div>
+            <a target="_blank" rel="noopener noreferrer" href={artist.external_urls.spotify}>
+              <i className="fas fa-play-circle"> Go to this artist on spotify</i>
+            </a>
+          </div>
           {artist.genres.length > 0
             ? <div>
                 <p>{`Genres: ${(artist.genres.reduce((all, genre) => all + genre + ', ', '')).slice(0, -2)}`}</p>
@@ -61,18 +67,13 @@ const ArtistDetail = ({
           <div>
             <p>{`Followers: ${addCommas(artist.followers.total)}`}</p>
           </div>
-          <div>
-            <a target="_blank" rel="noopener noreferrer" href={artist.external_urls.spotify}>
-              <i className="fas fa-play-circle">Go to this artist on spotify</i>
-            </a>
-          </div>
-          <div>
+          <div id="top-tracks">
             <p>Top Tracks:</p>
             {topTracks.map((track, i) =>
               <TrackCard track={track} fromAlbum={false} topNumber={i+1} key={track.id} />
             )}
           </div>
-          <div>
+          <div id="artists-related">
             <p>Artists Related:</p>
               {relatedArtists.map(artist =>
                 <ArtistCard artist={artist} key={artist.id} />
@@ -87,7 +88,7 @@ const ArtistDetail = ({
     <Fragment>
       {(prevSearchedWord !== undefined) && (prevSearchedWord !== searchedWord)
         ? <Redirect to="/albums"/>
-        : <div id="album-detail">
+        : <div id="artist-detail">
             {displayContent()}
           </div>
       }
