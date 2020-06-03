@@ -6,7 +6,7 @@ Spotify has a small problem with its api when making a request for albums, it re
 
 Add a .env file with:
 
-### `REACT_APP_CLIENT_ID=a5fa9e60468e466f8fba69d6155a4824`
+### `REACT_APP_CLIENT_ID=`
 
 Also you must have the Debugger extension for Chrome installed on your visual studio code
 
